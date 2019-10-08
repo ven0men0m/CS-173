@@ -1,0 +1,21 @@
+{% extends "myClassrooms/base.html" %}
+
+
+{% block content %}
+    <h1> L E A D E R B O A R D </h1>
+    <hr>
+	<hr>
+	<br>
+	
+	{% for item in leaderboard %}
+		<article class="media content-section">
+			<div class="media-body">
+				<p>Classroom: {{item.name}} </p>
+				<p>Courses: {{item.course}} </p>
+				<p>Location: {{item.location}}</p>
+				<p>{{item.classroomImage}}</p>
+			</div>
+		</article>
+	{% endfor %}
+
+{% endblock content %}
