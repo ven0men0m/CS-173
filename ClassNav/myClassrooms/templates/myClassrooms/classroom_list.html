@@ -2,18 +2,20 @@
 
 
 {% block content %}
-    <h1> L E A D E R B O A R D </h1>
-    <hr>
-	<hr>
-	<br>
-	
-	{% for item in leaderboard %}
+    <h1> Classrooms </h1>
+    {% for item in classroom %}
+	    <br><hr>
 		<article class="media content-section">
 			<div class="media-body">
-				<p>Classroom: {{item.name}} </p>
-				<p>Courses: {{item.course}} </p>
-				<p>Location: {{item.location}}</p>
-				<p>{{item.classroomImage}}</p>
+				<p><b>Classroom:</b> {{item.name}} </p>
+				<p><b>Courses:</b></p>
+                <ul>
+                    {% for course in item.course.all %}
+                    <li>{{course.name}}</li>
+                    {% endfor %}
+                </ul>
+				<p><b>Location:</b> {{item.location}}</p>
+				<img src="media/{{item.classroomImage}}" width="300px">
 			</div>
 		</article>
 	{% endfor %}
