@@ -33,14 +33,15 @@
       </nav>
     </header> -->
     <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">ClassNav</a>
+        <a class="navbar-brand" href="{% url 'list' %}">ClassNav</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarItems" aria-controls="navbarItems" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarItems">
             <!-- Add Classroom Link -->
             <a href="{% url 'list' %}">Classroom List</a>
-            <a class="btn btn-primary ml-auto" href="#" role="button">Add Classroom</a>
+            <a class="btn btn-primary ml-auto" href="{% url 'classroom-create' %}" role="button">Add Classroom</a>
+            <a class="btn btn-primary ml-auto" href="{% url 'class-create' %}" role="button">Add Class</a>
         </div>
     </nav>
     <main role="main" class="container">

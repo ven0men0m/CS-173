@@ -1,0 +1,21 @@
+{% extends "myClassrooms/base.html" %}
+
+
+{% block content %}
+    <h1> Classroom Detail </h1>   
+    <br><hr>
+	<article class="media content-section">
+		<div class="media-body">
+			<p><b>Classroom:</b> {{object.name}} </p>
+			<p><b>Courses:</b></p>
+            <ul>
+                {% for course in object.course.all %}
+                <li>{{course.name}}</li>
+                {% endfor %}
+            </ul>
+			<p><b>Location:</b> {{object.location}}</p>
+			<img src="media/{{object.classroomImage}}" width="300px">
+		</div>
+	</article>
+
+{% endblock content %}

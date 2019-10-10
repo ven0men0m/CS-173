@@ -7,7 +7,7 @@
 	    <br><hr>
 		<article class="media content-section">
 			<div class="media-body">
-				<p><b>Classroom:</b> {{item.name}} </p>
+				<h1><b>Classroom:</b> <a class="article-title" href="{% url 'detail' item.id %}">{{item.name}}</a></h1>
 				<p><b>Courses:</b></p>
                 <ul>
                     {% for course in item.course.all %}
