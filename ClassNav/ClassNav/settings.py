@@ -26,6 +26,7 @@ SECRET_KEY = '1n(lk119%*6934b)@l+%l^7p%slysp&gofr-b6r0oudf%h+8l3'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     'class-nav.herokuapp.com'
 ]
 
