@@ -3,6 +3,10 @@
 
 {% block content %}
     <h1> Classrooms </h1>
+    <form method="get" action="{% url 'list' %}">
+    	<p>Filter: <input type="search" name="class_name" placeholder="Class" /></p>
+    	<p><input type="submit" name="Search" value="Search"/></p>
+	</form>
     {% for item in classroom %}
 	    <br><hr>
 		<article class="media content-section">
@@ -10,7 +14,7 @@
 				<h1><b>Classroom:</b> <a class="article-title" href="{% url 'detail' item.id %}">{{item.name}}</a></h1>
 				<p><b>Courses:</b></p>
                 <ul>
-                    {% for course in item.course.all %}
+                    {% for course in item.vote.className.all %}
                     <li>{{course.name}}</li>
                     {% endfor %}
                 </ul>

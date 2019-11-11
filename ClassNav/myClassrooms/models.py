@@ -13,8 +13,6 @@ class Classes(models.Model):
 class Classrooms(models.Model):
 	id = models.AutoField(primary_key = True)
 	name = models.CharField(max_length = 100, verbose_name='Classroom Name')
-	course = models.ManyToManyField(Classes, related_name='classrooms')
-	upVote = models.IntegerField(null=True)
 	location = models.CharField(max_length=100, verbose_name='Location', null=True)
 	classroomImage = models.ImageField(upload_to='Images/%Y/%m/%d', verbose_name='Classroom Image', null=True)
 
@@ -23,3 +21,11 @@ class Classrooms(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('detail', kwargs={'pk': self.id})
+
+class Vote(models.Model):
+	voteNo = models.IntegerField(null=True)
+	classroomName = models.ForeignKey(Classrooms, on_delete=models.CASCADE)
+	className = models.ForeignKey(Classes, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.className.name + '_' + self.classroomName.name
