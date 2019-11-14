@@ -32,6 +32,7 @@ SECRET_KEY = '1n(lk119%*6934b)@l+%l^7p%slysp&gofr-b6r0oudf%h+8l3'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'localhost',
     'class-nav.herokuapp.com'
 ]
 
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'ClassNav.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
