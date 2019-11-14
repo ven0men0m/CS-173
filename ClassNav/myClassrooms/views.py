@@ -13,13 +13,19 @@ class ClassroomListView(ListView):
 
 	def get_queryset(self):
 		cName = self.request.GET.get('class_name', '')
-		new_context = Classrooms.objects.filter(vote__className__name__contains=cName).order_by('-vote__voteNo')
+		if not cName or cName == None:
+			new_context = Classrooms.objects.all()
+		else:
+			new_context = Classrooms.objects.filter(vote__className__name__contains=cName).order_by('-vote__voteNo')
+		print(cName)
 		print(new_context)
+		print('')
 		return new_context
 
 	def get_context_data(self, **kwargs):
 		context = super(ClassroomListView, self).get_context_data(**kwargs)
-		context['class_name'] = self.request.GET.get('filter', '')
+		cName = self.request.GET.get('filter', '')
+		context['classes'] = Classes.objects.filter(vote__className__name__contains=cName)
 		print(context)
 		return context
 
@@ -27,12 +33,33 @@ class ClassroomDetailView(DetailView):
 	model = Classrooms
 	context_object_name = 'classroom'
 
+	def get_context_data(self, **kwargs):
+		context = super(ClassroomDetailView, self).get_context_data(**kwargs)
+		obj = context['object']
+		print("yowp")
+		print(obj.location)
+		clName = obj.name
+		context['classes'] = Classes.objects.filter(vote__classroomName__name__contains=clName)
+		print(context)
+		return context
+
 class ClassroomCreateView(CreateView):
 	model = Classrooms
-	fields = ['name', 'course', 'location', 'classroomImage']
+	fields = ['name', 'location', 'classroomImage']
 	success_url = '/classroom/list'
 
 class ClassCreateView(CreateView):
 	model = Classes
 	fields = ['name']
 	success_url = '/classroom/list'
+
+class VoteCreateView(CreateView):
+	model = Vote
+	context_object_name = 'vote'
+	fields = ['voteNo', 'semester', 'classroomName', 'className']
+	success_url = '/classroom/list'
+
+	def get_context_data(self, **kwargs):
+		context = super(VoteCreateView, self).get_context_data(**kwargs)
+		print(context)
+		return context

@@ -24,8 +24,9 @@ class Classrooms(models.Model):
 
 class Vote(models.Model):
 	voteNo = models.IntegerField(null=True)
-	classroomName = models.ForeignKey(Classrooms, on_delete=models.CASCADE)
-	className = models.ForeignKey(Classes, on_delete=models.CASCADE)
+	semester = models.CharField(max_length=5, verbose_name='Semester (eg. 1920A)')
+	classroomName = models.ForeignKey(Classrooms, on_delete=models.CASCADE, verbose_name='Classroom')
+	className = models.ForeignKey(Classes, on_delete=models.CASCADE, verbose_name='Class')
 
 	def __str__(self):
 		return self.className.name + '_' + self.classroomName.name

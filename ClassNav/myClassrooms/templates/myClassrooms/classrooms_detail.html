@@ -8,8 +8,9 @@
 		<div class="media-body">
 			<p><b>Classroom:</b> {{object.name}} </p>
 			<p><b>Courses:</b></p>
+            <a class="btn btn-primary ml-auto" href="{% url 'vote-create' %}" role="button">Add Vote</a>
             <ul>
-                {% for course in object.course.all %}
+                {% for course in classes %}
                 <li>{{course.name}}</li>
                 {% endfor %}
             </ul>
