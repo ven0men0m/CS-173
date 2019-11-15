@@ -33,7 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    'class-nav.herokuapp.com'
+    'class-nav.herokuapp.com',
+    '127.0.0.1'
 ]
 
 
@@ -84,14 +85,14 @@ WSGI_APPLICATION = 'ClassNav.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+   }
+}
+if 'ON_HEROKU' in os.environ:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 # Password validation
@@ -136,6 +137,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# Activate Django-Heroku.
-django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+if 'ON_HEROKU' in os.environ:
+    # Activate Django-Heroku.
+    django_heroku.settings(locals())
+    if "OPTIONS" in DATABASES['default']:
+        if "sslmode" in DATABASES['default']['OPTIONS']:
+            del DATABASES['default']['OPTIONS']['sslmode']

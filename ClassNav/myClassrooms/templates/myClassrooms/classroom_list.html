@@ -1,11 +1,15 @@
 {% extends "myClassrooms/base.html" %}
 
-
 {% block content %}
     <h1> Classrooms </h1>
     <form method="get" action="{% url 'list' %}">
-    	<p>Filter: <input type="search" name="class_name" placeholder="Class" /></p>
-    	<p><input type="submit" name="Search" value="Search"/></p>
+        <label for="class_name" class="col-form-label">Filter</label>
+        <input type="text" name="class_name" placeholder="Class" maxlength="100" class="textinput textInput form-control" id="class_name" value="{{ request.GET.class_name }}">
+        <br>
+        <div class = "form-group">
+            <button class = "btn btn-outline-info" type="submit"> Search </button>
+            <a class = "btn btn-outline-info" href="{% url 'list' %}"> Reset </a>
+        </div>
 	</form>
     {% for item in classroom %}
 	    <br><hr>
@@ -13,6 +17,9 @@
 			<div class="media-body">
 				<h1><b>Classroom:</b> <a class="article-title" href="{% url 'detail' item.id %}">{{item.name}}</a></h1>
 				<p><b>Location:</b> {{item.location}}</p>
+                <!-- <p><b>Classes:</b>
+                    {% for course in classes %}{% if forloop.counter != 1 %},&nbsp;{% endif %}{{course.name}}{% endfor %}
+                </p> -->
 				<img src="/media/{{item.classroomImage}}" width="300px">
 			</div>
 		</article>

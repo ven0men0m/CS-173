@@ -2,20 +2,22 @@
 
 
 {% block content %}
-    <h1> Classroom Detail </h1>   
-    <br><hr>
+    
+    <h1><a class="article-title" href="{% url 'detail' object.id %}">{{object.name}}</a></h1>
 	<article class="media content-section">
 		<div class="media-body">
-			<p><b>Classroom:</b> {{object.name}} </p>
-			<p><b>Courses:</b></p>
-            <a class="btn btn-primary ml-auto" href="{% url 'vote-create' %}" role="button">Add Vote</a>
-            <ul>
-                {% for course in classes %}
-                <li>{{course.name}}</li>
-                {% endfor %}
-            </ul>
-			<p><b>Location:</b> {{object.location}}</p>
-			<img src="/media/{{object.classroomImage}}" width="300px">
+            <p>
+                <br><b>Location:</b> {{object.location}}<br><br>
+    			<img src="/media/{{object.classroomImage}}" width="300px">
+                <br><br>
+                <b>Courses:</b><br><br>
+                <a class="btn btn-primary ml-auto" href="{% url 'vote-create' %}" role="button">Vote for Course</a>
+                <ul class="list-group">
+                    {% for course in classes %}
+                    <li class="list-group-item">{{course.name}} <b></b></li>
+                    {% endfor %}
+                </ul>
+            </p>
 		</div>
 	</article>
 
