@@ -3,20 +3,21 @@
 
 {% block content %}
     
-    <h1><a class="article-title" href="{% url 'detail' object.id %}">{{object.name}}</a></h1>
+    <h1>{{object.name}}</h1>
 	<article class="media content-section">
 		<div class="media-body">
             <p>
                 <br><b>Location:</b> {{object.location}}<br><br>
     			<img src="/media/{{object.classroomImage}}" width="300px">
                 <br><br>
-                <b>Courses:</b><br><br>
-                <a class="btn btn-primary ml-auto" href="{% url 'vote-create' %}" role="button">Vote for Course</a>
+                <b>Courses:</b><br>
                 <ul class="list-group">
-                    {% for course in classes %}
-                    <li class="list-group-item">{{course.name}} <b></b></li>
+                    {% for course in vote %}
+                    <li class="list-group-item">{{course.className}} - {{course.semester}} <b></b></li>
                     {% endfor %}
-                </ul>
+                </ul><br>
+                <a class="btn btn-primary ml-auto" href="{% url 'vote-create' %}" role="button">Vote for Course</a>
+                
             </p>
 		</div>
 	</article>

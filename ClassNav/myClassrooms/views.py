@@ -18,16 +18,12 @@ class ClassroomListView(ListView):
 			new_context = Classrooms.objects.all()
 		else:
 			new_context = Classrooms.objects.filter(vote__className__name__icontains=cName).order_by('-vote__voteNo')
-		print(cName)
-		print(new_context)
-		print('')
 		return new_context
 
 	def get_context_data(self, **kwargs):
 		context = super(ClassroomListView, self).get_context_data(**kwargs)
 		cName = self.request.GET.get('filter', '')
 		context['classes'] = Classes.objects.filter(vote__className__name__icontains=cName)
-		print(context)
 		return context
 
 class ClassroomDetailView(DetailView):
@@ -37,12 +33,8 @@ class ClassroomDetailView(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(ClassroomDetailView, self).get_context_data(**kwargs)
 		obj = context['object']
-		print("yowp")
-		print(obj.location)
 		clName = obj.name
-		context['classes'] = Classes.objects.filter(vote__classroomName__name__icontains=clName)
 		context['vote'] = Vote.objects.filter(classroomName__name__icontains=clName)
-		print(context)
 		return context
 
 class ClassroomCreateView(CreateView):
@@ -63,5 +55,4 @@ class VoteCreateView(CreateView):
 
 	def get_context_data(self, **kwargs):
 		context = super(VoteCreateView, self).get_context_data(**kwargs)
-		print(context)
 		return context
